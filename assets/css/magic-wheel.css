@@ -1,0 +1,299 @@
+/* ==============================================================
+   BNI Anniversary Celebration - Magic Wheel Styling
+   Aesthetic: Festive, High-Stakes Corporate Game Show, Glowing Gold/Orange
+   ============================================================== */
+
+.wheel-stage {
+    background: radial-gradient(circle at center, #132E52 0%, #071629 100%);
+    color: #FFFFFF;
+    border-radius: var(--bni-radius-lg);
+    padding: 2.5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), inset 0 0 100px rgba(243, 112, 33, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.25);
+}
+
+.wheel-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    max-width: 92vw;
+    max-height: 92vw;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Outer decorative bulb ring */
+.wheel-outer-ring {
+    position: absolute;
+    width: 104%;
+    height: 104%;
+    border-radius: 50%;
+    border: 10px solid #D4AF37;
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* The Canvas Wheel */
+#wheelCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition: transform 0.1s ease-out;
+}
+
+/* The Needle / Flapper Indicator at top (12 o'clock) */
+.wheel-pointer {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 60px;
+    z-index: 10;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7));
+    transition: transform 0.08s ease;
+}
+
+.wheel-pointer.flapping {
+    animation: flap 0.12s ease-in-out infinite alternate;
+}
+
+@keyframes flap {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(-12deg); }
+}
+
+/* Wheel Center Hub with BNI Logo or Spin Button */
+.wheel-center-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFE082 0%, #FFA000 50%, #E65100 100%);
+    border: 6px solid #FFFFFF;
+    box-shadow: 0 0 30px rgba(255, 160, 0, 0.8), inset 0 3px 6px rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wheel-center-hub:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.wheel-center-hub:active {
+    transform: translate(-50%, -50%) scale(0.96);
+}
+
+.wheel-center-text {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.wheel-center-sub {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #FFF3E0;
+    text-transform: uppercase;
+}
+
+/* Spin Button Bar */
+.spin-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn-spin-now {
+    background: linear-gradient(135deg, #FF6F00 0%, #F57C00 50%, #E65100 100%);
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 1rem 3.5rem;
+    border-radius: 50px;
+    border: 3px solid #FFE082;
+    box-shadow: 0 0 35px rgba(243, 112, 33, 0.6), 0 10px 25px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-spin-now:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 50px rgba(255, 143, 0, 0.85), 0 15px 35px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #FFA000 0%, #FF6F00 100%);
+}
+
+.btn-spin-now:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* Winner Celebration Modal Overlay */
+.winner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(7, 22, 41, 0.88);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.35s ease;
+}
+
+.winner-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.winner-card {
+    background: linear-gradient(145deg, #0E294B 0%, #06182E 100%);
+    border: 3px solid #FFD700;
+    box-shadow: 0 0 80px rgba(255, 215, 0, 0.4), 0 30px 60px rgba(0, 0, 0, 0.8);
+    border-radius: var(--bni-radius-xl);
+    padding: 3rem 2.5rem;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+    position: relative;
+    transform: scale(0.85);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.winner-overlay.active .winner-card {
+    transform: scale(1);
+}
+
+.winner-trophy-icon {
+    font-size: 4.5rem;
+    color: #FFD700;
+    animation: trophyBounce 1s infinite alternate ease-in-out;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes trophyBounce {
+    0% { transform: translateY(0) rotate(-5deg); }
+    100% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.winner-badge-prize {
+    background: linear-gradient(135deg, #FF6F00 0%, #E65100 100%);
+    color: #FFFFFF;
+    font-size: 1.15rem;
+    font-weight: 800;
+    padding: 8px 24px;
+    border-radius: 50px;
+    display: inline-block;
+    border: 2px solid #FFE082;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.4);
+}
+
+.winner-name-huge {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    word-break: break-word;
+}
+
+.winner-lottery-pill {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding: 6px 20px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1.5px;
+}
+
+.winner-details-grid {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--bni-radius-md);
+    padding: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    text-align: left;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==============================================================
+   PRESENTATION / PROJECTOR FULLSCREEN MODE
+   ============================================================== */
+body.presentation-mode {
+    background: #061527 !important;
+    overflow-x: hidden;
+}
+
+body.presentation-mode .admin-sidebar,
+body.presentation-mode .bni-navbar,
+body.presentation-mode .admin-topbar,
+body.presentation-mode .bni-footer,
+body.presentation-mode .hide-on-presentation {
+    display: none !important;
+}
+
+body.presentation-mode .admin-content,
+body.presentation-mode .admin-body {
+    padding: 0.5rem !important;
+    background: transparent !important;
+}
+
+body.presentation-mode .wheel-stage {
+    min-height: 96vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+    border-radius: 0;
+    background: radial-gradient(circle at center, #0F2D54 0%, #040D1A 100%);
+}
+
+body.presentation-mode .wheel-container {
+    width: 660px;
+    height: 660px;
+    max-width: 82vh;
+    max-height: 82vh;
+}

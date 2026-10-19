@@ -1,0 +1,593 @@
+/* ==============================================================
+   BNI Anniversary Celebration - Main Design System
+   Colors: BNI Orange (#F37021), BNI Teal/Navy (#005E54 / #0B2240), Gold (#F5A623)
+   ============================================================== */
+
+:root {
+    --bni-orange: #F37021;
+    --bni-orange-dark: #D45A10;
+    --bni-orange-light: #FF8D4D;
+    --bni-teal: #005E54;
+    --bni-teal-dark: #00413A;
+    --bni-teal-light: #028073;
+    --bni-navy: #0B2240;
+    --bni-navy-dark: #071629;
+    --bni-gold: #F5A623;
+    --bni-gold-glow: rgba(245, 166, 35, 0.4);
+    --bni-white: #FFFFFF;
+    --bni-bg-light: #F8FAFD;
+    --bni-surface: #FFFFFF;
+    --bni-text-main: #0F172A;
+    --bni-text-muted: #64748B;
+    --bni-border: #E2E8F0;
+    --bni-radius-sm: 8px;
+    --bni-radius-md: 14px;
+    --bni-radius-lg: 20px;
+    --bni-radius-xl: 30px;
+    --bni-shadow: 0 10px 30px -5px rgba(0, 45, 80, 0.08);
+    --bni-shadow-lg: 0 20px 40px -10px rgba(0, 45, 80, 0.15);
+    --bni-shadow-orange: 0 10px 25px rgba(243, 112, 33, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bni-bg-light);
+    color: var(--bni-text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--bni-orange);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: var(--bni-orange-dark);
+}
+
+/* ==============================================================
+   NAVIGATION & HEADER
+   ============================================================== */
+.bni-navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 94, 84, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.bni-navbar .navbar-brand img {
+    height: 44px;
+    width: auto;
+}
+
+.bni-navbar .nav-link {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--bni-navy) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--bni-radius-sm);
+    transition: all 0.2s ease;
+}
+
+.bni-navbar .nav-link:hover,
+.bni-navbar .nav-link.active {
+    color: var(--bni-orange) !important;
+    background: rgba(243, 112, 33, 0.08);
+}
+
+/* ==============================================================
+   HERO SECTION (CELEBRATION THEME)
+   ============================================================== */
+.hero-celebration {
+    background: linear-gradient(135deg, #0B2240 0%, #005E54 50%, #082E3E 100%);
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 1rem 4rem;
+}
+
+.hero-celebration::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(243, 112, 33, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero-celebration::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(245, 166, 35, 0.18) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--bni-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(6px);
+}
+
+.hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.hero-title span.highlight-orange {
+    color: var(--bni-orange);
+    text-shadow: 0 4px 15px rgba(243, 112, 33, 0.4);
+}
+
+.hero-tagline {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    max-width: 650px;
+}
+
+/* ==============================================================
+   STAT CARDS
+   ============================================================== */
+.stat-card {
+    background: var(--bni-surface);
+    border-radius: var(--bni-radius-md);
+    padding: 1.5rem;
+    border: 1px solid var(--bni-border);
+    box-shadow: var(--bni-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--bni-shadow-lg);
+}
+
+.stat-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--bni-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.stat-icon-orange {
+    background: rgba(243, 112, 33, 0.12);
+    color: var(--bni-orange);
+}
+
+.stat-icon-teal {
+    background: rgba(0, 94, 84, 0.12);
+    color: var(--bni-teal);
+}
+
+.stat-icon-gold {
+    background: rgba(245, 166, 35, 0.15);
+    color: #D48806;
+}
+
+.stat-icon-navy {
+    background: rgba(11, 34, 64, 0.12);
+    color: var(--bni-navy);
+}
+
+.stat-value {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--bni-navy);
+    line-height: 1.1;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bni-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* ==============================================================
+   BUTTONS
+   ============================================================== */
+.btn-bni-orange {
+    background: linear-gradient(135deg, var(--bni-orange) 0%, var(--bni-orange-dark) 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--bni-radius-sm);
+    border: none;
+    box-shadow: var(--bni-shadow-orange);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-bni-orange:hover {
+    background: linear-gradient(135deg, var(--bni-orange-light) 0%, var(--bni-orange) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(243, 112, 33, 0.45);
+}
+
+.btn-bni-teal {
+    background: linear-gradient(135deg, var(--bni-teal) 0%, var(--bni-teal-dark) 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--bni-radius-sm);
+    border: none;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-bni-teal:hover {
+    background: linear-gradient(135deg, var(--bni-teal-light) 0%, var(--bni-teal) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 94, 84, 0.3);
+}
+
+.btn-bni-gold {
+    background: linear-gradient(135deg, #FFE082 0%, #FFB300 100%);
+    color: #3E2723 !important;
+    font-weight: 800;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--bni-radius-sm);
+    border: none;
+    box-shadow: 0 8px 20px rgba(255, 179, 0, 0.35);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-bni-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 179, 0, 0.5);
+}
+
+.btn-bni-outline {
+    background: transparent;
+    color: var(--bni-navy) !important;
+    border: 2px solid var(--bni-navy);
+    font-weight: 700;
+    padding: 0.7rem 1.6rem;
+    border-radius: var(--bni-radius-sm);
+    transition: all 0.2s ease;
+}
+
+.btn-bni-outline:hover {
+    background: var(--bni-navy);
+    color: #FFFFFF !important;
+}
+
+/* ==============================================================
+   CARDS & CONTAINERS
+   ============================================================== */
+.bni-card {
+    background: var(--bni-surface);
+    border-radius: var(--bni-radius-md);
+    border: 1px solid var(--bni-border);
+    box-shadow: var(--bni-shadow);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.bni-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--bni-border);
+}
+
+.bni-card-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--bni-navy);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ==============================================================
+   CHECK-IN MOBILE PASS CARD
+   ============================================================== */
+.checkin-pass {
+    max-width: 520px;
+    margin: 2rem auto;
+    background: #FFFFFF;
+    border-radius: var(--bni-radius-lg);
+    box-shadow: 0 25px 60px rgba(0, 45, 80, 0.18);
+    overflow: hidden;
+    border: 1px solid rgba(0, 94, 84, 0.15);
+}
+
+.checkin-pass-header {
+    background: linear-gradient(135deg, var(--bni-navy) 0%, var(--bni-teal) 100%);
+    color: #FFFFFF;
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    position: relative;
+}
+
+.checkin-pass-header::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: var(--bni-teal) transparent;
+    display: block;
+    width: 0;
+}
+
+.checkin-pass-body {
+    padding: 2.2rem 1.8rem;
+}
+
+.lottery-badge {
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+    border: 2px dashed #FFA000;
+    border-radius: var(--bni-radius-md);
+    padding: 1.25rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.lottery-badge-number {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #E65100;
+    letter-spacing: 2px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--bni-border);
+    font-size: 0.95rem;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--bni-text-muted);
+    font-weight: 500;
+}
+
+.info-value {
+    color: var(--bni-navy);
+    font-weight: 700;
+    text-align: right;
+}
+
+/* ==============================================================
+   BADGES & STATUS
+   ============================================================== */
+.badge-hadir {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #A5D6A7;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-belum {
+    background: #FFF3E0;
+    color: #E65100;
+    border: 1px solid #FFCC80;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==============================================================
+   ADMIN SIDEBAR & LAYOUT
+   ============================================================== */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 270px;
+    background: var(--bni-navy-dark);
+    color: #FFFFFF;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.admin-sidebar-header {
+    padding: 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-sidebar-nav {
+    padding: 1rem 0.75rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.8rem 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    border-radius: var(--bni-radius-sm);
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+}
+
+.admin-nav-item:hover,
+.admin-nav-item.active {
+    background: var(--bni-orange);
+    color: #FFFFFF;
+    transform: translateX(3px);
+}
+
+.admin-nav-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(255, 255, 255, 0.35);
+    padding: 1rem 1rem 0.4rem;
+    font-weight: 700;
+}
+
+.admin-content {
+    flex-grow: 1;
+    background: var(--bni-bg-light);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.admin-topbar {
+    background: #FFFFFF;
+    padding: 1rem 1.75rem;
+    border-bottom: 1px solid var(--bni-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-body {
+    padding: 1.75rem;
+    flex-grow: 1;
+}
+
+/* ==============================================================
+   TABLES
+   ============================================================== */
+.table-responsive {
+    border-radius: var(--bni-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--bni-border);
+}
+
+.bni-table {
+    width: 100%;
+    margin-bottom: 0;
+    background: #FFFFFF;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.bni-table th {
+    background: #F1F5F9;
+    color: var(--bni-navy);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    border-bottom: 1px solid var(--bni-border);
+}
+
+.bni-table td {
+    padding: 0.95rem 1rem;
+    border-bottom: 1px solid #EDF2F7;
+    font-size: 0.92rem;
+    vertical-align: middle;
+}
+
+.bni-table tr:hover td {
+    background-color: #F8FAFC;
+}
+
+/* ==============================================================
+   FOOTER
+   ============================================================== */
+.bni-footer {
+    background: var(--bni-navy-dark);
+    color: rgba(255, 255, 255, 0.75);
+    padding: 2.5rem 1rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+    border-top: 3px solid var(--bni-orange);
+}
+
+.bni-footer a {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.bni-footer a:hover {
+    color: var(--bni-orange);
+}
+
+/* ==============================================================
+   RESPONSIVE QUERIES
+   ============================================================== */
+@media (max-width: 991px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+    .admin-sidebar {
+        width: 100%;
+    }
+}

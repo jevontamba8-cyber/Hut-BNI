@@ -1,0 +1,12 @@
+# Composer vendor directory
+/vendor/
+
+# Temporary & scratch files
+/scratch/
+*.log
+
+# OS & Editor generated files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
