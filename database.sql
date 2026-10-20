@@ -134,15 +134,15 @@ CREATE TABLE `event_settings` (
 -- Default Event Settings
 -- -------------------------------------------------------------
 INSERT INTO `event_settings` (`setting_key`, `setting_value`, `description`) VALUES
-('event_title', 'BNI Anniversary Celebration', 'Judul Acara Ulang Tahun'),
-('event_tagline', 'Celebrating Together, Growing Stronger', 'Tagline resmi acara'),
+('event_title', 'HUT 30 Tahun BNI Life', 'Judul Acara Ulang Tahun'),
+('event_tagline', 'Pengabdian Tiga Dekade Dalam Mewujudkan Masa Depan Yang Lebih Baik', 'Tagline resmi acara'),
 ('event_date', '2026-10-25', 'Tanggal pelaksanaan acara'),
 ('event_time', '08:30 - 16:00 WIB', 'Waktu pelaksanaan acara'),
 ('event_location', 'Grand Ballroom Hotel Indonesia Kempinski Jakarta', 'Lokasi venue acara'),
-('event_theme', 'Synergy of Excellence & Digital Innovation', 'Tema perayaan HUT'),
+('event_theme', 'Trikala Bhakti Nawasena', 'Tema perayaan HUT'),
 ('win_rule', 'one_win_only', 'Aturan kemenangan: one_win_only atau multiple_allowed'),
 ('qr_base_url', 'http://localhost/bni-anniversary/check-in.php', 'URL dasar untuk QR Code check-in'),
-('company_name', 'PT Bank Negara Indonesia (Persero) Tbk', 'Nama Penyelenggara');
+('company_name', 'PT BNI Life Insurance', 'Nama Penyelenggara');
 
 -- -------------------------------------------------------------
 -- Default Admin Accounts

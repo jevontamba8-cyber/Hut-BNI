@@ -15,25 +15,32 @@ requireLogin();
 $pageTitle = 'Dashboard Utama';
 $activeMenu = 'dashboard';
 $stats = getEventStats();
-$db = getDB();
+$recentCheckins = [];
+$recentWinners = [];
 
-// Recent check-ins
-$recentCheckins = $db->query("
-    SELECT id, nomor_undian, nama_lengkap, divisi, cabang, waktu_checkin 
-    FROM participants 
-    WHERE status_kehadiran = 'HADIR' 
-    ORDER BY waktu_checkin DESC LIMIT 6
-")->fetchAll();
+try {
+    $db = getDB();
 
-// Recent draw winners
-$recentWinners = $db->query("
-    SELECT dr.id, dr.waktu_undian, p.nama_lengkap, p.nomor_undian, p.cabang, pr.nama_hadiah 
-    FROM draw_results dr
-    JOIN participants p ON dr.participant_id = p.id
-    JOIN prizes pr ON dr.prize_id = pr.id
-    WHERE dr.status_hasil = 'SAH'
-    ORDER BY dr.id DESC LIMIT 5
-")->fetchAll();
+    // Recent check-ins
+    $recentCheckins = $db->query("
+        SELECT id, nomor_undian, nama_lengkap, divisi, cabang, waktu_checkin 
+        FROM participants 
+        WHERE status_kehadiran = 'HADIR' 
+        ORDER BY waktu_checkin DESC LIMIT 6
+    ")->fetchAll();
+
+    // Recent draw winners
+    $recentWinners = $db->query("
+        SELECT dr.id, dr.waktu_undian, p.nama_lengkap, p.nomor_undian, p.cabang, pr.nama_hadiah 
+        FROM draw_results dr
+        JOIN participants p ON dr.participant_id = p.id
+        JOIN prizes pr ON dr.prize_id = pr.id
+        WHERE dr.status_hasil = 'SAH'
+        ORDER BY dr.id DESC LIMIT 5
+    ")->fetchAll();
+} catch (Throwable $e) {
+    error_log("Dashboard query error: " . $e->getMessage());
+}
 
 include __DIR__ . '/admin-header.php';
 ?>

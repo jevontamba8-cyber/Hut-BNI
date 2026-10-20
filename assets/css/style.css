@@ -68,9 +68,16 @@ a:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
-.bni-navbar .navbar-brand img {
-    height: 44px;
+.bni-navbar .navbar-brand img,
+.navbar-logo-img {
+    height: 48px;
     width: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.bni-navbar .navbar-brand:hover img {
+    transform: scale(1.03);
 }
 
 .bni-navbar .nav-link {

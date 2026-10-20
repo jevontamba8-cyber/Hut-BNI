@@ -17,23 +17,50 @@ $stats = getEventStats();
 $baseUrl = getBaseUrl();
 
 // Fetch active prize list for showcase
-$db = getDB();
-$prizesStmt = $db->query("SELECT id, nama_hadiah, deskripsi, jumlah_pemenang, status_hadiah FROM prizes WHERE status_hadiah != 'NONAKTIF' ORDER BY urutan ASC LIMIT 6");
-$prizes = $prizesStmt->fetchAll();
+$prizes = [];
+$recentWinners = [];
+$dbConnected = true;
 
-// Fetch recent winners ticker
-$recentWinnersStmt = $db->query("
-    SELECT p.nama_lengkap, p.cabang, pr.nama_hadiah, dr.waktu_undian 
-    FROM draw_results dr 
-    JOIN participants p ON dr.participant_id = p.id 
-    JOIN prizes pr ON dr.prize_id = pr.id 
-    WHERE dr.status_hasil = 'SAH' 
-    ORDER BY dr.id DESC LIMIT 5
-");
-$recentWinners = $recentWinnersStmt->fetchAll();
+try {
+    $db = getDB();
+    $prizesStmt = $db->query("SELECT id, nama_hadiah, deskripsi, jumlah_pemenang, status_hadiah FROM prizes WHERE status_hadiah != 'NONAKTIF' ORDER BY urutan ASC LIMIT 6");
+    $prizes = $prizesStmt->fetchAll();
+
+    $recentWinnersStmt = $db->query("
+        SELECT p.nama_lengkap, p.cabang, pr.nama_hadiah, dr.waktu_undian 
+        FROM draw_results dr 
+        JOIN participants p ON dr.participant_id = p.id 
+        JOIN prizes pr ON dr.prize_id = pr.id 
+        WHERE dr.status_hasil = 'SAH' 
+        ORDER BY dr.id DESC LIMIT 5
+    ");
+    $recentWinners = $recentWinnersStmt->fetchAll();
+} catch (Throwable $e) {
+    $dbConnected = false;
+    error_log("Landing page DB error: " . $e->getMessage());
+    $prizes = [
+        ['id' => 1, 'nama_hadiah' => 'Grand Prize: Emas Logam Mulia Antam 50 Gram', 'deskripsi' => 'Logam Mulia CertiEye Antam 50g Ed. Khusus HUT 30 BNI Life', 'jumlah_pemenang' => 1, 'status_hadiah' => 'AKTIF'],
+        ['id' => 2, 'nama_hadiah' => 'Hadiah Utama 1: Sepeda Motor Honda Vario 160 CBS', 'deskripsi' => 'All New Honda Vario 160 OTR Jakarta + BPKB', 'jumlah_pemenang' => 2, 'status_hadiah' => 'AKTIF'],
+        ['id' => 3, 'nama_hadiah' => 'Hadiah Utama 2: iPhone 16 Pro Max 256GB', 'deskripsi' => 'Apple iPhone 16 Pro Max Resmi iBox Indonesia', 'jumlah_pemenang' => 3, 'status_hadiah' => 'AKTIF'],
+        ['id' => 4, 'nama_hadiah' => 'Hadiah Favorit: Samsung Smart LED TV 55 Inch UHD 4K', 'deskripsi' => 'Samsung Crystal UHD 4K Smart TV Series 2026', 'jumlah_pemenang' => 5, 'status_hadiah' => 'AKTIF'],
+        ['id' => 5, 'nama_hadiah' => 'Hadiah Spesial: Tabungan BNI Taplus @Rp 5.000.000', 'deskripsi' => 'Top-up langsung saldo rekening BNI Taplus', 'jumlah_pemenang' => 10, 'status_hadiah' => 'AKTIF'],
+        ['id' => 6, 'nama_hadiah' => 'Door Prize: BNI TapCash @Rp 1.000.000', 'deskripsi' => 'Kartu BNI TapCash edisi terbatas HUT 30 BNI Life saldo 1jt', 'jumlah_pemenang' => 25, 'status_hadiah' => 'AKTIF']
+    ];
+}
 
 include __DIR__ . '/includes/header.php';
 ?>
+
+<?php if (!$dbConnected && (!empty(getenv('VERCEL')) || !empty(getenv('VERCEL_ENV')))): ?>
+<div class="bg-warning text-dark py-2 px-3 small border-bottom border-warning shadow-sm">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div>
+            <i class="fa-solid fa-cloud me-1 fw-bold"></i> <strong>Live Demo Vercel:</strong> Database cloud belum dihubungkan. Masukkan <code>DB_HOST</code>, <code>DB_NAME</code>, <code>DB_USER</code>, dan <code>DB_PASS</code> di Vercel Dashboard &gt; Settings &gt; Environment Variables.
+        </div>
+        <span class="badge bg-dark text-warning">Demo Mode</span>
+    </div>
+</div>
+<?php endif; ?>
 
 <!-- Hero Section -->
 <section class="hero-celebration">
@@ -83,12 +110,12 @@ include __DIR__ . '/includes/header.php';
                             <i class="fa-solid fa-gift me-1"></i> Special Prizes
                         </span>
                     </div>
-                    <div class="my-4">
-                        <i class="fa-solid fa-award text-warning" style="font-size: 5rem; filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.6));"></i>
+                    <div class="my-3 py-2 px-3 bg-white rounded-4 shadow-sm d-inline-block">
+                        <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" style="height: 90px; width: auto; max-width: 100%;">
                     </div>
-                    <h3 class="fw-bold mb-2">Tema Perayaan HUT</h3>
-                    <p class="text-white-50 px-3 mb-4">
-                        “<?= e($settings['event_theme'] ?? 'Synergy of Excellence & Digital Innovation') ?>”
+                    <h3 class="fw-bold mb-1" style="font-family: 'Outfit', sans-serif;">Trikala Bhakti Nawasena</h3>
+                    <p class="text-white-50 px-3 mb-3 small">
+                        “<?= e($settings['event_tagline'] ?? 'Pengabdian Tiga Dekade Dalam Mewujudkan Masa Depan Yang Lebih Baik') ?>”
                     </p>
                     <div class="p-3 bg-black bg-opacity-25 rounded-3 border border-white border-opacity-10">
                         <div class="small text-warning fw-bold text-uppercase mb-1">Status Pintu Masuk</div>

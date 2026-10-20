@@ -47,8 +47,10 @@ $flash = getFlash();
     <!-- Sidebar -->
     <aside class="admin-sidebar shadow-lg">
         <div class="admin-sidebar-header d-flex align-items-center justify-content-between">
-            <a href="<?= $baseUrl ?>/admin/dashboard.php" class="d-flex align-items-center gap-2 text-decoration-none">
-                <img src="<?= $baseUrl ?>/assets/images/bni-logo.svg" alt="BNI Logo" style="height: 38px; filter: brightness(0) invert(1);">
+            <a href="<?= $baseUrl ?>/admin/dashboard.php" class="d-flex align-items-center gap-2 text-decoration-none w-100">
+                <div class="bg-white rounded-3 px-3 py-2 shadow-sm d-inline-flex align-items-center justify-content-center w-100">
+                    <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" style="height: 40px; width: auto; max-width: 100%;">
+                </div>
             </a>
         </div>
 

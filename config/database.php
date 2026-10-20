@@ -11,6 +11,11 @@ if (!defined('APP_INIT')) {
     define('APP_INIT', true);
 }
 
+// Automatically load Composer dependencies if present
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
+
 // Database Credentials
 define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
 define('DB_PORT', getenv('DB_PORT') ?: '3306');
@@ -44,6 +49,14 @@ function getDB(): PDO
             PDO::ATTR_EMULATE_PREPARES   => false,
             PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
         ];
+
+        // Enable SSL support for Cloud MySQL databases (TiDB, Aiven, PlanetScale, etc.)
+        if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
+            $isRemote = !in_array(DB_HOST, ['127.0.0.1', 'localhost', '']);
+            if ($isRemote || getenv('DB_SSL') === 'true') {
+                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+            }
+        }
 
         try {
             $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);

@@ -42,7 +42,7 @@ include __DIR__ . '/admin-header.php';
         <div class="printable-stand bni-card shadow-lg p-5 text-center border-3 border-warning bg-white position-relative" style="border-radius: 24px;">
             <!-- BNI Header -->
             <div class="mb-4">
-                <img src="<?= $baseUrl ?>/assets/images/bni-logo.svg" alt="BNI Logo" style="height: 55px;" class="mb-2">
+                <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" style="height: 75px; width: auto;" class="mb-2">
                 <h2 class="fw-bold text-navy mb-1" style="font-family: 'Outfit', sans-serif; letter-spacing: -0.5px;">
                     <?= e($settings['event_title'] ?? 'BNI Anniversary Celebration') ?>
                 </h2>

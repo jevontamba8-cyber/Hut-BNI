@@ -16,9 +16,11 @@ $baseUrl = getBaseUrl();
         <div class="row align-items-center g-3">
             <div class="col-md-6 text-center text-md-start">
                 <div class="d-flex align-items-center gap-3 justify-content-center justify-content-md-start mb-2">
-                    <img src="<?= $baseUrl ?>/assets/images/bni-logo.svg" alt="BNI Logo" style="height: 32px; filter: brightness(0) invert(1);">
-                    <div class="vr bg-secondary"></div>
-                    <span class="fw-bold text-white"><?= e($settings['event_title'] ?? 'BNI Anniversary Celebration') ?></span>
+                    <div class="bg-white rounded-2 px-2 py-1 d-inline-flex align-items-center shadow-sm">
+                        <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" style="height: 32px; width: auto;">
+                    </div>
+                    <div class="vr bg-secondary opacity-50"></div>
+                    <span class="fw-bold text-white"><?= e($settings['event_title'] ?? '30 Tahun BNI Life') ?></span>
                 </div>
                 <p class="small text-white-50 mb-0">
                     &copy; <?= date('Y') ?> <?= e($settings['company_name'] ?? 'PT Bank Negara Indonesia (Persero) Tbk') ?>. All rights reserved.

@@ -14,54 +14,61 @@ $pageTitle = 'Hasil Undian Magic Wheel';
 $activeNav = 'winners';
 $settings = getSettings();
 $baseUrl = getBaseUrl();
-$db = getDB();
+$prizesList = [];
+$winners = [];
 
-// Filters & Search
-$prizeFilter = isset($_GET['prize_id']) ? (int)$_GET['prize_id'] : 0;
-$search = trim($_GET['search'] ?? '');
+try {
+    $db = getDB();
 
-// Fetch Prize list for dropdown filter
-$prizesStmt = $db->query('SELECT id, nama_hadiah, jumlah_pemenang FROM prizes ORDER BY urutan ASC');
-$prizesList = $prizesStmt->fetchAll();
+    // Filters & Search
+    $prizeFilter = isset($_GET['prize_id']) ? (int)$_GET['prize_id'] : 0;
+    $search = trim($_GET['search'] ?? '');
 
-// Build Query
-$sql = "
-    SELECT 
-        dr.id AS draw_id,
-        dr.draw_session_id,
-        dr.waktu_undian,
-        p.nama_lengkap,
-        p.nomor_undian,
-        p.divisi,
-        p.cabang,
-        pr.id AS prize_id,
-        pr.nama_hadiah
-    FROM draw_results dr
-    JOIN participants p ON dr.participant_id = p.id
-    JOIN prizes pr ON dr.prize_id = pr.id
-    WHERE dr.status_hasil = 'SAH'
-";
+    // Fetch Prize list for dropdown filter
+    $prizesStmt = $db->query('SELECT id, nama_hadiah, jumlah_pemenang FROM prizes ORDER BY urutan ASC');
+    $prizesList = $prizesStmt->fetchAll();
 
-$params = [];
+    // Build Query
+    $sql = "
+        SELECT 
+            dr.id AS draw_id,
+            dr.draw_session_id,
+            dr.waktu_undian,
+            p.nama_lengkap,
+            p.nomor_undian,
+            p.divisi,
+            p.cabang,
+            pr.id AS prize_id,
+            pr.nama_hadiah
+        FROM draw_results dr
+        JOIN participants p ON dr.participant_id = p.id
+        JOIN prizes pr ON dr.prize_id = pr.id
+        WHERE dr.status_hasil = 'SAH'
+    ";
 
-if ($prizeFilter > 0) {
-    $sql .= " AND dr.prize_id = ? ";
-    $params[] = $prizeFilter;
+    $params = [];
+
+    if ($prizeFilter > 0) {
+        $sql .= " AND dr.prize_id = ? ";
+        $params[] = $prizeFilter;
+    }
+
+    if (!empty($search)) {
+        $sql .= " AND (p.nama_lengkap LIKE ? OR p.nomor_undian LIKE ? OR p.cabang LIKE ?) ";
+        $searchTerm = "%$search%";
+        $params[] = $searchTerm;
+        $params[] = $searchTerm;
+        $params[] = $searchTerm;
+    }
+
+    $sql .= " ORDER BY dr.id DESC";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute($params);
+    $winners = $stmt->fetchAll();
+} catch (Throwable $e) {
+    error_log('Winners page DB error: ' . $e->getMessage());
 }
-
-if (!empty($search)) {
-    $sql .= " AND (p.nama_lengkap LIKE ? OR p.nomor_undian LIKE ? OR p.cabang LIKE ?) ";
-    $searchTerm = "%$search%";
-    $params[] = $searchTerm;
-    $params[] = $searchTerm;
-    $params[] = $searchTerm;
-}
-
-$sql .= " ORDER BY dr.id DESC";
-
-$stmt = $db->prepare($sql);
-$stmt->execute($params);
-$winners = $stmt->fetchAll();
 
 include __DIR__ . '/includes/header.php';
 ?>

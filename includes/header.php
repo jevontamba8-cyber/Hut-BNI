@@ -45,7 +45,7 @@ $flash = getFlash();
 <nav class="navbar navbar-expand-lg bni-navbar">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="<?= $baseUrl ?>/index.php">
-            <img src="<?= $baseUrl ?>/assets/images/bni-logo.svg" alt="BNI Logo">
+            <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" class="navbar-logo-img">
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bniNavbarNav">
             <i class="fa-solid fa-bars text-primary fs-4"></i>

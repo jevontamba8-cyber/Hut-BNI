@@ -50,8 +50,11 @@ include __DIR__ . '/admin-header.php';
             <!-- Stage Top Bar (Presentation Mode Controls) -->
             <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
                 <div class="d-flex align-items-center gap-3">
+                    <div class="bg-white rounded-3 px-2.5 py-1 shadow-sm d-inline-flex align-items-center">
+                        <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" style="height: 30px; width: auto;">
+                    </div>
                     <span class="badge bg-warning text-dark fw-bold px-3 py-2 rounded-pill shadow-sm">
-                        <i class="fa-solid fa-sparkles me-1"></i> BNI MAGIC WHEEL
+                        <i class="fa-solid fa-sparkles me-1"></i> MAGIC WHEEL
                     </span>
                     <span class="text-white-50 small d-none d-sm-inline">
                         <i class="fa-solid fa-users me-1 text-warning"></i> <strong class="text-white" id="eligibleCountLabel"><?= number_format($eligibleCount) ?></strong> Peserta Berhak Diundi

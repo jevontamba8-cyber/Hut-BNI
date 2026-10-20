@@ -59,7 +59,7 @@ include __DIR__ . '/includes/header.php';
         <div class="col-md-6 col-lg-5">
             <div class="bni-card shadow-lg p-4 p-md-5">
                 <div class="text-center mb-4">
-                    <img src="<?= $baseUrl ?>/assets/images/bni-logo.svg" alt="BNI Logo" style="height: 50px;" class="mb-3">
+                    <img src="<?= $baseUrl ?>/assets/images/bni-life-30.png" alt="30 Tahun BNI Life" style="height: 72px; width: auto;" class="mb-3">
                     <h3 class="fw-bold text-navy mb-1">Portal Panitia & Admin</h3>
                     <p class="text-muted small">
                         Masuk untuk mengelola peserta, memonitor check-in, dan memutar Magic Wheel.
