@@ -31,6 +31,13 @@ Sistem registrasi mandiri dua langkah:
 
 ---
 
+### D. Infografis Ringkasan Alur Kerja Website (Workflow Infographic)
+Visual diagram alur kerja komprehensif yang merangkum 3 pilar utama sistem: Check-in Mandiri, Pengundian Magic Wheel, dan Manajemen Admin & Panitia.
+
+![Ringkasan Alur Kerja Website](04_alur_kerja_website.jpg)
+
+---
+
 ## 2. Diagram Alur Sistem (System Flowcharts)
 
 ### Alur 1: Check-in Mandiri Peserta (QR Code & NIK)
