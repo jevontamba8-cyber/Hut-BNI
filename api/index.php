@@ -6,6 +6,12 @@
 
 declare(strict_types=1);
 
+// Silence deprecation notices from modern PHP 8.4/8.5+ runtimes
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+if (!empty(getenv('VERCEL')) || !empty(getenv('VERCEL_ENV'))) {
+    ini_set('display_errors', '0');
+}
+
 $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $uri = urldecode($uri ?: '/');
 
